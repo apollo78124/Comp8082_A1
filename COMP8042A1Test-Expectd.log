@@ -1,0 +1,98 @@
+***** Part 1: expression calculation *****
+Evaluated expression: 2 3 + 4 5 * + = 25
+Evaluated expression: 2 + 3 = 5
+Evaluated expression: ( 2 + 3 ) + ( 4 * 5 ) = 25
+Evaluated expression: * + 1 4 * 5 2 = 50
+Evaluated expression: 1 3 = Invalid Expression!
+Evaluated expression: 1 3 + = 4
+Evaluated expression: @ 1 3 5 = 3
+Evaluated expression: 1 3 5 @ = 3
+Evaluated expression: 2 @ 4 = Invalid Expression!
+Evaluated expression: 1 2 1 2 + @ 4 * 3 1 @ = 4
+Evaluated expression: 2 2 3 ^ * 1 + 2 / = 8
+
+
+***** Part 2: Dequeue using circular array *****
+To understand the results of this part, please
+read the notes above Deque.h very carefully!
+************************************************
+Queue content:  0 0 0 0 0     front(0)/rear(0)
+Queue content:  1 2 3 0 0     front(0)/rear(3)
+Dequeue next: 1 (should be 1)
+Dequeue next: 2 (should be 2)
+Dequeue next: 3 (should be 3)
+Queue must be empty now!
+Dequing from the empty queue: 0 (should be 0!)
+Added 10, 20, 30, 40 so far, queue is full so we cannot enqueue 50!
+Queue content:  30 40 3 10 20     front(3)/rear(2)
+Dequeue next: 10 (should be 10)
+Queue content:  30 40 100 10 20     front(4)/rear(3)
+Dequeue next: 20 (should be 20)
+Dequeue next: 30 (should be 30)
+Dequeue next: 40 (should be 40)
+Dequeue next: 100 (should be 100)
+
+
+***** Part 3: Dequeue using circular array *****
+Empty tree (should be Empty tree)
+Tree content: NUM DELETED = 0
+12
+34
+40
+56
+78
+
+Tree2 content: NUM DELETED = 0
+12
+34
+40
+56
+78
+
+Tree3 content: NUM DELETED = 0
+12
+34
+40
+56
+78
+
+Next Tree content: NUM DELETED = 0
+-1
+0
+1
+5
+9
+10
+11
+
+Same Tree content after some removal: NUM DELETED = 3
+-1
+0
+9
+11
+
+Same Tree content after some removal (with the removed content): NUM DELETED = 3
+-1
+0
+{1}
+{5}
+9
+{10}
+11
+
+Same Tree content after some removal and insertion: NUM DELETED = 2
+-1
+0
+9
+10
+11
+
+Same Tree content after some removal and insertion (with the removed content): NUM DELETED = 2
+-1
+0
+{1}
+{5}
+9
+10
+11
+
