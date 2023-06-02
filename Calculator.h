@@ -22,7 +22,7 @@ class calculator {
             }
             //Prefix evaluation
             if (exprValidation == 1) {
-                return "Invalid Expression!";
+                return evaluatePrefix(expr);
             }
             //Infix evaluation
             if (exprValidation == 2) {
@@ -96,7 +96,6 @@ private:
         float result = stk.top();
         ostringstream oss1;
         //Round up float to a whole number.
-        //TODO: Make it keep decimal points
         oss1 << std::fixed << setprecision(0) << result;
         string resultString = oss1.str();
         return resultString;
@@ -201,6 +200,48 @@ private:
     static string evaluateInfix(string expr) {
         string postFixed = infix2postfix(expr);
         return evaluatePostfix(postFixed);
+    }
+
+    static string evaluatePrefix(string expr) {
+
+        stack<double> operendStack;
+        int size = expr.size() - 1;
+
+        for (int i = size; i >= 0; i--) {
+            if (expr[i] == ' ' || expr[i] == '=') {
+                continue;
+            }
+
+            if (isOperand(expr[i]) > 0) {
+                operendStack.push(expr[i] - '0');
+            } else if (isOperator(expr[i])) {
+
+                if (expr[i] == '@') {
+                    double sum = 0;
+                    int counter = 0;
+                    while (!operendStack.empty() && isOperand(operendStack.top())) {
+                        sum += operendStack.top();
+                        operendStack.pop();
+                        counter++;
+                    }
+                    operendStack.push(sum / counter);
+                } else {
+                    double o1 = operendStack.top();
+                    operendStack.pop();
+                    double o2 = operendStack.top();
+                    operendStack.pop();
+                    operendStack.push(operation(o1, o2, expr[i]));
+                }
+            }
+        }
+
+        float result = operendStack.top();
+        ostringstream oss1;
+        //Round up float to a whole number.
+        //TODO: Make it keep decimal points
+        oss1 << std::fixed << setprecision(0) << result;
+        string resultString = oss1.str();
+        return resultString;
     }
 };
 
