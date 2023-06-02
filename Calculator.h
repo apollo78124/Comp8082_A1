@@ -84,11 +84,23 @@ private:
         string::iterator it;
         for(it=expr.begin(); it!=expr.end(); it++){
             if(isOperator(*it)){
-                a = stk.top();
-                stk.pop();
-                b = stk.top();
-                stk.pop();
-                stk.push(operation(a, b, *it));
+
+                if (*it == '@') {
+                    double sum = 0;
+                    int counter = 0;
+                    while (!stk.empty() && isOperand(stk.top())) {
+                        sum += stk.top();
+                        stk.pop();
+                        counter++;
+                    }
+                    stk.push(sum / counter);
+                } else {
+                    a = stk.top();
+                    stk.pop();
+                    b = stk.top();
+                    stk.pop();
+                    stk.push(operation(a, b, *it));
+                }
             }else if(isOperand(*it) > 0){
                 stk.push(scanNum(*it));
             }
