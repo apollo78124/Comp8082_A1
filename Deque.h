@@ -19,17 +19,94 @@ template <typename Object>
  */
 class Queue {
 public:
-    explicit Queue(int s) {}
+    explicit Queue(int s) {
+        N = s;
+        front = 0;
+        back = N-1;
+        qu1.assign(N, NULL);
+    }
+
     Queue () = default;
     ~Queue() = default;
-    void enque(Object obj) {}
-    Object deque() {return (Object)0;}
-    bool empty() {return true;}
-    bool full() {return false;}
-    string print() {return "";}
+    void enque(Object obj) {
+
+        if (full() == true) {
+            return;
+        }
+
+        if (back  >= N - 1 ) {
+            back = 0;
+            qu1[back] = obj;
+        } else {
+            back++;
+            qu1[back] = obj;
+        }
+    }
+    Object deque() {
+        if (empty()) {
+            return (Object)0;
+        }
+        else  {
+            if (front >= N - 1) {
+                front = 0;
+                return qu1[N - 1];
+            } else {
+                front++;
+                return qu1[front - 1];
+            }
+        }
+
+
+    }
+
+    bool empty() {
+        if (front == 0) {
+            if (back == N-1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (front - 1 == back) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    bool full() {
+
+        if (back  >= N - 1) {
+            if (front == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else  {
+            if (back + 2 == front) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    string print() {
+        string printer = "";
+        for (int i = 0; i < qu1.size(); i++)
+            printer += to_string(qu1[i]) + " ";
+        return printer;
+    }
     // this function will return the underlying array used for storing the queue data and will be used to grade the
     // implementation.
-    vector<Object> debugGetArray() {return vector<Object>({});}
+    vector<Object> debugGetArray() {
+        return qu1;
+    }
+
+private:
+    vector<Object> qu1;
+    int front;
+    int back;
+    int N;
 };
 
 #endif //DEQUE_H

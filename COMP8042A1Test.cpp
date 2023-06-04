@@ -15,53 +15,53 @@ using namespace std;
 
 
 int main() {
-    cout << "***** Part 1: expression calculation *****" << endl;
-    string expressions[] = {"2 3 + 4 5 * + =", "2 + 3 =", "( 2 + 3 ) + ( 4 * 5 ) =", "* + 1 4 * 5 2 =",
-                            "1 3 =", "1 3 + =", "@ 1 3 5 =", "1 3 5 @ =", "2 @ 4 =",
-                            "1 2 1 2 + @ 4 * 3 1 @ =", "2 2 3 ^ * 1 + 2 / ="};
-    string expected[] = {"25", "5", "25", "50", "Invalid Expression!", "4", "3", "3",
-                         "Invalid Expression!", "4", "8"};
+//    cout << "***** Part 1: expression calculation *****" << endl;
+//    string expressions[] = {"2 3 + 4 5 * + =", "2 + 3 =", "( 2 + 3 ) + ( 4 * 5 ) =", "* + 1 4 * 5 2 =",
+//                            "1 3 =", "1 3 + =", "@ 1 3 5 =", "1 3 5 @ =", "2 @ 4 =",
+//                            "1 2 1 2 + @ 4 * 3 1 @ =", "2 2 3 ^ * 1 + 2 / ="};
+//    string expected[] = {"25", "5", "25", "50", "Invalid Expression!", "4", "3", "3",
+//                         "Invalid Expression!", "4", "8"};
     int i = 0;
-    for (auto& expr: expressions){
-        cout << "Evaluated expression: " << expr << " " << calculator::evaluateExpression(expr) << endl;
-        assert(calculator::evaluateExpression(expr) == expected[i]);
-        i++;
-    }
-//    cout << endl << endl << "***** Part 2: Dequeue using circular array *****" << endl;
-//    cout << "To understand the results of this part, please" << endl;
-//    cout << "read the notes above Deque.h very carefully!" << endl;
-//    cout << "************************************************" << endl;
-//    Queue<int> Q(5);
-//    cout << "Queue content: " << Q.print() << endl;
-//    Q.enque(1);
-//    Q.enque(2);
-//    Q.enque(3);
-//    cout << "Queue content: " << Q.print() << endl;
-//    cout << "Dequeue next: " << Q.deque() << " (should be 1)" << endl;
-//    cout << "Dequeue next: " << Q.deque() << " (should be 2)" << endl;
-//    cout << "Dequeue next: " << Q.deque() << " (should be 3)" << endl;
-//    cout << "Queue must be empty now!" << endl;
-//    cout << "Dequing from the empty queue: " << Q.deque() << " (should be 0!)" << endl;
-//    Q.enque(10);
-//    Q.enque(20);
-//    Q.enque(30);
-//    Q.enque(40);
-//    cout << "Added 10, 20, 30, 40 so far, queue is full so we cannot enqueue 50!" << endl;
-//    Q.enque(50);
-//    cout << "Queue content: " << Q.print() << endl;
-//    int expectedContent[] = {30, 40, 3, 10, 20};
-//    i = 0;
-//    for(auto& elem : Q.debugGetArray()){
-//        assert(elem == expectedContent[i]);
+//    for (auto& expr: expressions){
+//        cout << "Evaluated expression: " << expr << " " << calculator::evaluateExpression(expr) << endl;
+//        assert(calculator::evaluateExpression(expr) == expected[i]);
 //        i++;
 //    }
-//    cout << "Dequeue next: " << Q.deque() << " (should be 10)" << endl;
-//    Q.enque(100);
-//    cout << "Queue content: " << Q.print() << endl;
-//    cout << "Dequeue next: " << Q.deque() << " (should be 20)" << endl;
-//    cout << "Dequeue next: " << Q.deque() << " (should be 30)" << endl;
-//    cout << "Dequeue next: " << Q.deque() << " (should be 40)" << endl;
-//    cout << "Dequeue next: " << Q.deque() << " (should be 100)" << endl;
+    cout << endl << endl << "***** Part 2: Dequeue using circular array *****" << endl;
+    cout << "To understand the results of this part, please" << endl;
+    cout << "read the notes above Deque.h very carefully!" << endl;
+    cout << "************************************************" << endl;
+    Queue<int> Q(5);
+    cout << "Queue content: " << Q.print() << endl;
+    Q.enque(1);
+    Q.enque(2);
+    Q.enque(3);
+    cout << "Queue content: " << Q.print() << endl;
+    cout << "Dequeue next: " << Q.deque() << " (should be 1)" << endl;
+    cout << "Dequeue next: " << Q.deque() << " (should be 2)" << endl;
+    cout << "Dequeue next: " << Q.deque() << " (should be 3)" << endl;
+    cout << "Queue must be empty now!" << endl;
+    cout << "Dequing from the empty queue: " << Q.deque() << " (should be 0!)" << endl;
+    Q.enque(10);
+    Q.enque(20);
+    Q.enque(30);
+    Q.enque(40);
+    cout << "Added 10, 20, 30, 40 so far, queue is full so we cannot enqueue 50!" << endl;
+    Q.enque(50);
+    cout << "Queue content: " << Q.print() << endl;
+    int expectedContent[] = {30, 40, 3, 10, 20};
+    i = 0;
+    for(auto& elem : Q.debugGetArray()){
+        assert(elem == expectedContent[i]);
+        i++;
+    }
+    cout << "Dequeue next: " << Q.deque() << " (should be 10)" << endl;
+    Q.enque(100);
+    cout << "Queue content: " << Q.print() << endl;
+    cout << "Dequeue next: " << Q.deque() << " (should be 20)" << endl;
+    cout << "Dequeue next: " << Q.deque() << " (should be 30)" << endl;
+    cout << "Dequeue next: " << Q.deque() << " (should be 40)" << endl;
+    cout << "Dequeue next: " << Q.deque() << " (should be 100)" << endl;
 //    cout << endl << endl << "***** Part 3: Dequeue using circular array *****" << endl;
 //    SearchTree<int> bst;
 //    assert(bst.isEmpty());
