@@ -15,6 +15,9 @@ using namespace std;
 
 class calculator {
     public:
+    /*
+     * Function to evaluate any expression
+     */
         static string evaluateExpression(const string & expr) {
             int exprValidation = validateExpression(expr);
             if (exprValidation == 0) {
@@ -36,6 +39,9 @@ class calculator {
         }
 
 private:
+    /*
+     * Determine if the expression is prefix or infix or postfix or not valid
+     */
     static int validateExpression(string expr) {
         string::iterator it;
         int counter = 0;
@@ -78,6 +84,10 @@ private:
         return 0;
     }
 
+    /*
+     * Function to evaluate postfix expression in string, return result as a string
+     * Result rounded up to whole integer.
+     */
     static string evaluatePostfix(string expr) {
         int a, b;
         stack<float> stk;
@@ -85,6 +95,9 @@ private:
         for(it=expr.begin(); it!=expr.end(); it++){
             if(isOperator(*it)){
 
+                /**
+                 * @ operator can take more than 2 operands
+                 */
                 if (*it == '@') {
                     double sum = 0;
                     int counter = 0;
@@ -94,6 +107,9 @@ private:
                         counter++;
                     }
                     stk.push(sum / counter);
+                    /*
+                     * For regular operators, process only takes 2 operands.
+                     */
                 } else {
                     a = stk.top();
                     stk.pop();
@@ -113,19 +129,45 @@ private:
         return resultString;
     }
 
+    /**
+     * Convert numbers in string to float.
+     * @param ch
+     * @return
+     */
     static float scanNum(char ch){
         int value;
         value = ch;
         return float(value-'0');//return float from character
     }
+
+    /**
+     * Determine if a character is a operator
+     * @param ch
+     * @return
+     */
     static bool isOperator(char ch){
         return (ch == '+'|| ch == '-'|| ch == '*'|| ch == '/' || ch == '^' || ch == '@');
     }
+
+    /**
+     * Determine if a character is a operand
+     * @param ch
+     * @return
+     */
     static int isOperand(char ch){
         if(ch >= '0' && ch <= '9')
             return 1;//character is an operand
         return -1;//not an operand
     }
+
+    /**
+     * Take two operands and average operators and evaluate the result.
+     * @ operator does not get evaluated here.
+     * @param a
+     * @param b
+     * @param op
+     * @return
+     */
     static float operation(int a, int b, char op){
         //Perform operation
         if(op == '+')
@@ -144,6 +186,11 @@ private:
             return INT_MIN; //return negative infinity
     }
 
+    /**
+     * Evaluate priorities of operators as a level.
+     * @param op
+     * @return
+     */
     static int getPrecedence(char op) {
         if (op == '*' || op == '/')
             return 2;
@@ -153,6 +200,12 @@ private:
             return 0;
     }
 
+    /**
+     * Convert Infix expression to postfix expression.
+     * This function was written for the previous lab.
+     * @param infix
+     * @return
+     */
     static string infix2postfix(string infix) {
         stack<char> stack;
         string postfix;
@@ -209,25 +262,45 @@ private:
         return postfix;
     }
 
+    /**
+     * Evaluate infix expression by converting it to postfix expression.
+     *
+     * @param expr
+     * @return
+     */
     static string evaluateInfix(string expr) {
         string postFixed = infix2postfix(expr);
         return evaluatePostfix(postFixed);
     }
 
+    /**
+     * Evaluate prefix expression.
+     * @param expr
+     * @return
+     */
     static string evaluatePrefix(string expr) {
 
         stack<double> operendStack;
         int size = expr.size() - 1;
 
         for (int i = size; i >= 0; i--) {
+            /**
+             * When character is white space or equal sign, skip without doing anything.
+             */
             if (expr[i] == ' ' || expr[i] == '=') {
                 continue;
             }
 
+            /**
+             * If character is operand, push to stack
+             */
             if (isOperand(expr[i]) > 0) {
                 operendStack.push(expr[i] - '0');
             } else if (isOperator(expr[i])) {
 
+                /**
+                 * When operator is a @ sign, take out all operand until the first operator from the stack and average them
+                 */
                 if (expr[i] == '@') {
                     double sum = 0;
                     int counter = 0;
@@ -238,6 +311,9 @@ private:
                     }
                     operendStack.push(sum / counter);
                 } else {
+                    /**
+                     * When regular operator is reached, take out 2 operand and do operation.
+                     */
                     double o1 = operendStack.top();
                     operendStack.pop();
                     double o2 = operendStack.top();
@@ -247,10 +323,12 @@ private:
             }
         }
 
+        /**
+         * Convert float result to string.
+         */
         float result = operendStack.top();
         ostringstream oss1;
         //Round up float to a whole number.
-        //TODO: Make it keep decimal points
         oss1 << std::fixed << setprecision(0) << result;
         string resultString = oss1.str();
         return resultString;
