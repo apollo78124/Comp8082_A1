@@ -23,7 +23,8 @@ public:
         N = s;
         front = 0;
         back = N-1;
-        qu1.assign(N, NULL);
+        vector<Object> tempVec(N);
+        qu1 = tempVec;
     }
 
     Queue () = default;
@@ -44,7 +45,7 @@ public:
     }
     Object deque() {
         if (empty()) {
-            return (Object)0;
+            return Object{};
         }
         else  {
             if (front >= N - 1) {
@@ -92,8 +93,12 @@ public:
     }
     string print() {
         string printer = "";
-        for (int i = 0; i < qu1.size(); i++)
-            printer += to_string(qu1[i]) + " ";
+        stringstream ss;
+            for (int i = 0; i < qu1.size(); i++) {
+                ss << qu1[i];
+                ss << " ";
+            }
+        printer = ss.str();
         return printer;
     }
     // this function will return the underlying array used for storing the queue data and will be used to grade the

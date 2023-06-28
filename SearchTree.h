@@ -126,7 +126,38 @@ public:
     // the function which tests for the branch heights and assures the tree is
     // an AVL tree (balanced)
     void balance() {
-        // TODO fill in this function
+        reportUnbalance(root);
+    }
+
+    void balance2(BinaryNode *t) {
+
+    }
+
+    void reportUnbalance(BinaryNode *t) {
+
+        if(t != nullptr) {
+            reportUnbalance(t->left);
+            int difference = abs(tree_height(t->left) - tree_height(t->right));
+            if (difference > 1) {
+                balance2(t);
+            }
+            reportUnbalance(t->right);
+        }
+    }
+
+    int tree_height(BinaryNode* root) {
+        // Get the height of the tree
+        if (!root)
+            return 0;
+        else {
+            // Find the height of both subtrees and use the larger one
+            int left_height = tree_height(root->left);
+            int right_height = tree_height(root->right);
+            if (left_height >= right_height)
+                return left_height + 1;
+            else
+                return right_height + 1;
+        }
     }
     /**************************End the implementation for part 2 in here*************************/
     /****************All the required functions for part 2 must be placed above this line*******/
